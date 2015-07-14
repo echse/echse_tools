@@ -1,0 +1,39 @@
+\name{lineLength}
+\alias{lineLength}
+\title{Lenght of a line in 2D}
+\usage{
+  lineLength(xy_strings, sepchar)
+}
+\arguments{
+  \item{xy_strings}{A vector of positions (as strings).
+  Each position consists of the x and y coordinate
+  separated by a single separator character.}
+
+  \item{sepchar}{The character separating the x and y
+  value.}
+}
+\value{
+  The line's length.
+}
+\description{
+  Returns the length of a line, represented as a vector of
+  x,y-coordinates. The vector is expected to be of type
+  character and each element is interpreted as a pair of x
+  and y coordinates. Merging the x and y info into a single
+  value allows for use of the function as the 'FUN'
+  argument of \code{tapply}.
+}
+\examples{
+# A data frame containing two line features
+lineSet= data.frame(
+  id= c(1,1,2,2,2),
+  coords= c("0,0","1,1","2,2","1,2","1,1"),
+  stringsAsFactors=FALSE
+)
+L= tapply(X=lineSet$coords, INDEX=lineSet$id, FUN=lineLength, sepchar=",")
+print(L)
+}
+\author{
+  David Kneis \email{david.kneis@uni-potsdam.de}
+}
+

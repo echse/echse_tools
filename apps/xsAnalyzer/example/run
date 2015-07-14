@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# NOTE: This will only run on systems with a bash shell
+
+../bin/xsAnalyzer file_xsection="in/montalban/geometry_constRough.txt" file_flows="in/montalban/flowsOfInterest.txt" file_out="out/montalban_constRough.txt" read_3d=false read_roughness=false default_roughness=30 slope=0.000485 plain_length=1000. max_nreserv_kalmil=100 print_only_routing=false
+
+../bin/xsAnalyzer file_xsection="in/montalban/geometry_variableRough.txt" file_flows="in/montalban/flowsOfInterest.txt" file_out="out/montalban_variableRough.txt" read_3d=false read_roughness=true default_roughness=-99 slope=0.000485 plain_length=1000. max_nreserv_kalmil=100 print_only_routing=false
+

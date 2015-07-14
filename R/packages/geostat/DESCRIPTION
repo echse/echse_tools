@@ -1,0 +1,12 @@
+Package: geostat
+Type: Package
+Title: Utilities for spatial interpolation
+Version: 0.1
+Date: 2012-05-31
+Author: David Kneis <david.kneis@uni-potsdam.de>
+Maintainer: David Kneis <david.kneis@uni-potsdam.de>
+Description: The package provides selected functions for spatial interpolation
+    of data. It is not a complete geo-statistical package though.
+License: GPL-3
+Collate:
+    'geostat.r'

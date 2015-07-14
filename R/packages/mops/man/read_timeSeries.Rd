@@ -1,0 +1,74 @@
+\name{read_timeSeries}
+\alias{read_timeSeries}
+\title{Read a time series file}
+\usage{
+read_timeSeries(file, colTime, colValue, colsep = "\\t",
+  timeConv = function(x) {     as.POSIXct(strptime(x,
+  "\%Y-\%m-\%d \%H:\%M:\%S", tz = "UTC"), tz = "UTC") }, nodata = NA,
+  periods.select = data.frame(begin = c(), end = c()),
+  periods.ignore = data.frame(begin = c(), end = c()))
+}
+\arguments{
+  \item{file}{Name of the file containing the time series.}
+
+  \item{colTime}{Name of column in \code{file} containing
+  time info.}
+
+  \item{colValue}{Name of column in \code{file} containing
+  the data.}
+
+  \item{colsep}{Column separator used in \code{file}.
+  Defaults to TAB.}
+
+  \item{timeConv}{A function to convert the strings in
+  column \code{colTime} of \code{file} into values of class
+  \code{POSIXct}.  The default function expects the strings
+  to be in ISO8601 format with date and time separated by a
+  single blank. Example: '1969-12-31 23:55:00' means five
+  minutes before the begin of the UNIX epoche. When dealing
+  with longer time series, it is important to use a time
+  zone without DST, such as 'UTC', in the \code{tz}
+  argument of the conversion functions. Otherwise, the
+  settings for the current locale are likely to be used,
+  which may fail.}
+
+  \item{periods.select}{A data frame with two columns
+  'begin' and 'end' both of class \code{POSIXct}. Each
+  record defines a 'period of interest'. The time series is
+  filtered for data falling into (at least) one of these
+  periods. Other data are ignored. The limits defined by
+  'begin' and 'end' are part of the period. If
+  \code{periods} is an empty data frame (default), no
+  filtering takes place. Note the \code{periods.ignore}
+  argument.}
+
+  \item{periods.ignore}{Similar to \code{periods.select},
+  but here, each record defines a 'period to ignore'. Thus,
+  the time series is filtered for data \emph{not} falling
+  into \emph{any} of the specified periods. If a record in
+  \code{periods.ignore} conflicts with a record in
+  \code{periods.select}, i.e. a 'period to ignore' overlaps
+  with a 'period of interest', data within the overlap are
+  \emph{ignored}.}
+
+  \item{nodata}{A value which indicates missing or corrupt
+  data in the time series values. The corresponding records
+  are skipped when creating the result table. Often used
+  values are -9999 or \code{NA} (default).}
+}
+\value{
+A data frame with two columns 'time' and 'value'.
+}
+\description{
+The function reads a time series file and returns a data
+frame, possibly filtered according to supplied rules. The
+time series is not necessarily regular.
+}
+\note{
+The function generates an error if the number of records of
+the (filtered) time series is zero.
+}
+\author{
+David Kneis \email{david.kneis@uni-potsdam.de}
+}
+

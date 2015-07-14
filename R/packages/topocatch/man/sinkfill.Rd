@@ -1,0 +1,52 @@
+\name{sinkfill}
+\alias{sinkfill}
+\title{Filling of sinks in a digital elevation model (DEM)}
+\usage{
+  sinkfill(grid, ndigits, silent = TRUE)
+}
+\arguments{
+  \item{grid}{The DEM as an object of class geogrid.}
+
+  \item{ndigits}{Number of relevant digits in the raw DEM
+  (integer); see notes}
+
+  \item{silent}{Print status info? (logical)}
+}
+\value{
+  The DEM with sinks filled as a list of type grid.
+}
+\description{
+  Sinks are filled by a non-iterative approach. To make
+  this work, the data are internally rounded to integers
+  after appropriate scaling. For large elevation models the
+  filling of sinks may consume a lot of time (minutes to
+  hours).
+}
+\note{
+  Filling of sinks is performed on the rounded elevation
+  data after multiplication with 10^\code{ndigits}. If the
+  original DEM has a resolution of decimeters, for example,
+  one would use \code{ndigits} = 1 to preserve that
+  resolution. If an accurracy of 1 meter is tolerable, one
+  would set \code{ndigits} = 0 in order to speed up the
+  computation.
+}
+\examples{
+# Create a simple DEM with some sinks
+dem= geogrid(m=matrix(c(
+    3,3,3,3,3,3,-9999,-9999,
+    3,1,2,2,3,3,3,-9999,
+    3,3,3,3,3,3,3,3,
+    5,5,5,5,5,5,2,5,
+    5,5,2,3,4,5,2,5,
+    5,5,5,5,5,5,5,5
+  ), ncol=8, nrow=6, byrow=TRUE),
+  xllcorner=0, yllcorner=0, cellsize=1, nodata_value=-9999)
+dem2= sinkfill(grid=dem, ndigits=0, silent=FALSE)
+geogrid.plot(dem, "DEM with sinks")
+geogrid.plot(dem2, "Sinks filled")
+}
+\author{
+  David Kneis \email{david.kneis@uni-potsdam.de}
+}
+

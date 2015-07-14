@@ -1,0 +1,29 @@
+Package: topocatch
+Type: Package
+Title: Pre-processing of geo data for hydrological catchment modeling
+Version: 0.2
+Date: 2012-09-17
+Author: David Kneis <david.kneis@uni-potsdam.de>
+Maintainer: David Kneis <david.kneis@uni-potsdam.de>
+Description: The package provides a number of methods to pre-process geo data
+    for the purpose of (semi-distributed) hydrological catchment modeling.
+License: GPL-3
+Depends:
+    shapefiles,
+    maptools,
+    foreign
+Collate:
+    'topocatch.r'
+    'data.r'
+    'private_common_fortranWrappers.r'
+    'private_common_geogrid.r'
+    'private_common_shapefile.r'
+    'private_common_utils.r'
+    'private_hydroModelData-Sub_catchAttribs.r'
+    'private_hydroModelData-Sub_catchments.r'
+    'private_hydroModelData-Sub_hydrolinkage.r'
+    'private_hydroModelData-Sub_reachAttribs.r'
+    'xsections_basics.r'
+    'xsections_extractDEM.r'
+    'xsections_reachPars.r'
+    'private_hydroModelData-Sub_assignGages.r'

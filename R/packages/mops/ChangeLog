@@ -1,0 +1,48 @@
+
+2014-04-02: Major revision of the package. The most important change is that
+  the method modelError_multiDim no longer reads observation data from a file
+  but expects them to be passed as a data frame (for better efficiency). Further
+  changes were made to methods designed for operational updating.
+
+2014-02-18: The package now checks whether the user's time zone in set to 'UTC'
+  by means of the .onLoad function. Time zone specifications 'GMT' all changed
+  to 'UTC'.
+
+2013-12-26: Plotting has been outsourced from the 'mcs_eval' methods that
+  analyzes the output of a Monte-Carlo simulation. This allows for the
+  development of more flexible plotting methods.
+  A bug in the documentation of the 'mcs_sample' method was corrected.
+
+2013-08-21: The generation of parameter sets was moved to a separate function
+  'mcs_sample'. This allows for the re-use of a particular parameter set in
+  multiple MCS (which differ by other input data such as boundary conditions).
+
+2013-07-31: The method 'mcs_eval' used to analyze the output of a Monte-Carlo
+  simulation now generates two files: a .pdf file with graphics and a .txt file
+  with results in numerical format.
+
+2013-06-10: Major revision of the package with modification of many of the
+  methods. Most important: The modelError_multiDim method no longer edits
+  the model's input files automatically. The editing must now be performed
+  by an external function. The user must make sure that this function is
+  actually called inside modelError_multiDim.
+  Furthermore: The Monte-Carlo method was re-worked completely. The actual
+  simulation and the analysis of results are now in separate functions. This
+  allows for a much more flexible use (because the results can be analyzed in
+  different ways without the need for re-running the simulations).
+
+2012-08-14: Changes in visEval to properly handle/plot missing observations.
+
+2012-08-14: Changes in visEval to properly handle/plot missing observations.
+
+2012-07-05: Improved documentation of methods.
+
+2012-07-03: Bug fix. The time conversion functions were not properly passed in
+  nested methods. The inner methods were always called with the defaults
+  arguments because actual arguments were missing.
+
+2012-06-11: The "GMT" time zone is now used in the default functions converting
+  character representation of date/time to class POSIXct. This is to avoid
+  problems with DST occuring when the system-specific defaults are used or the
+  TZ environment variable does not specify a DST-free zone.
+

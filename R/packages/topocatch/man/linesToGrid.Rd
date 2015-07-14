@@ -1,0 +1,80 @@
+\name{linesToGrid}
+\alias{linesToGrid}
+\title{Vector-to-raster conversion for lines}
+\usage{
+  linesToGrid(ncol, nrow, xllcorner, yllcorner, cellsize,
+    lineTable, code_undefined = -9999, code_conflict = -1,
+    nbuffer = 0, silent = TRUE)
+}
+\arguments{
+  \item{ncol}{Number of columns in the output raster}
+
+  \item{nrow}{Number of rows in the output raster}
+
+  \item{xllcorner}{X-coordinate of the output raster's
+  Western margin}
+
+  \item{yllcorner}{Y-coordinate of the output raster's
+  Southern margin}
+
+  \item{cellsize}{The size of a quadratic grid cell, i.e.
+  cell extent in X and Y direction.}
+
+  \item{code_undefined}{An integer code to be used as a
+  background value for the output raster. This code must
+  not be present in the 'id' column of the \code{lineTable}
+  argument. It is used as the 'nodata' value of the result
+  grid.}
+
+  \item{code_conflict}{Integer code assigned to those cells
+  of the output raster touched by multiple lines. This code
+  must not be present in the 'id' column of the
+  \code{lineTable} argument.}
+
+  \item{nbuffer}{An integer value to control the thickness
+  of the rasterized lines. The default value of 0 produces
+  lines being just 1 cell wide. Values of \code{nbuffer}=1,
+  2, 3 result in line withs of 3, 5, 7 cells,
+  respectively.}
+
+  \item{lineTable}{A data frame holding the lines' IDs and
+  coordinates. There must be three columns named 'id', 'x',
+  and 'y'. The 'id' column must be of type integer while
+  the values in 'x' and 'y' are expected to be numeric.}
+
+  \item{silent}{Print status info? (logical)}
+}
+\value{
+  An object of class geogrid.
+}
+\description{
+  Converts a set of lines into a raster.
+}
+\note{
+  There is no guarantee that all lines being present in
+  \code{lineTable} can be transferred into the output
+  raster. This is especially so if a line's length is in
+  the order of the raster's cell size or smaller. In those
+  cases, the function reports the ID(s) of the problematic
+  line(s) and calls \code{stop}.
+}
+\examples{
+arcs= data.frame(
+  id= c(1,1,1,2,2,2,3,3,3,3,3,3),
+  x=  c(1,2,3,5,4,3,3,2,2,3,4,5),
+  y=  c(5,4,3,5,4,3,3,2,1,1,1,1)
+)
+raster= linesToGrid(ncol=5, nrow=5, xllcorner=0.5, yllcorner=0.5, cellsize=1,
+  lineTable=arcs)
+lines.plot= function() {
+  for (id in unique(arcs$id)) {
+    i= which(arcs$id == id)
+    lines(x=arcs$x[i], y=arcs$y[i])
+  }
+}
+geogrid.plot(raster,"Gridded lines",fun=lines.plot)
+}
+\author{
+  David Kneis \email{david.kneis@uni-potsdam.de}
+}
+

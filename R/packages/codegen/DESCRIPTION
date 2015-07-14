@@ -1,0 +1,11 @@
+Package: codegen
+Type: Package
+Title: Code generator for the ECHSE
+Version: 0.1
+Date: 2012-06-07
+Author: David Kneis <david.kneis@uni-potsdam.de>
+Maintainer: David Kneis <david.kneis@uni-potsdam.de>
+Description: The package provides a function to generate C++ code from a
+    user-supplied declaration of model classes. The generated code is intended
+    for use with the Eco-hydrological Simulation Environment (ECHSE).
+License: GPL-3

@@ -1,0 +1,78 @@
+\name{dem.analyze}
+\alias{dem.analyze}
+\title{Analyze a digital elevation model (DEM)}
+\usage{
+  dem.analyze(fileDEM, fileDIR, fileACC, fileCTI, fileSHP,
+    crit_source_area, x_inBasin = NULL, y_inBasin = NULL,
+    id_field = "id", class_field = "class",
+    minlength_reach = 100, classname_reach = "rch",
+    classname_minireach = "minirch", dz_min = 0.1,
+    replace = FALSE, silent = TRUE)
+}
+\arguments{
+  \item{fileDEM}{Name/path of the INPUT file containing the
+  \emph{sink-filled} DEM (ASCII grid).}
+
+  \item{fileDIR}{Name/path of the OUTPUT file containing
+  flow direction codes (ASCII grid).}
+
+  \item{fileACC}{Name/path of the OUTPUT file containing
+  flow accumulation data (ASCII grid).}
+
+  \item{fileCTI}{Name/path of the OUTPUT file containing
+  values of the concentation time index (ASCII grid).}
+
+  \item{fileSHP}{Name/path of the OUTPUT file containing
+  the generated river net (shape file format).}
+
+  \item{minlength_reach}{Minimum length of a river section
+  to be classified as a reach. Shorter sections are
+  considered as so-called 'mini-reaches'.}
+
+  \item{classname_reach}{Class name for reach objects.}
+
+  \item{classname_minireach}{Class name for mini-reach
+  objects (see the \code{minlength_reach} argument).}
+
+  \item{id_field}{Name of the ID field in the output shape
+  file.}
+
+  \item{class_field}{Name of the class field in the output
+  shape file.}
+
+  \item{silent}{Print status info? (logical)}
+
+  \item{crit_source_area}{A numeric value defining the
+  critical source area (CSA). Streams are assumed to form
+  in cells with a catchment whose areal extent is >= the
+  CSA value. Should be several times larger than the extent
+  of a single grid cell.}
+
+  \item{dz_min}{A small numeric value > 0 representing a
+  minimum elevation difference between adjacent cells of
+  the elevation model. It prevents the slope and thus the
+  CTI to become infinite in flat areas. Defaults to 0.1.}
+
+  \item{x_inBasin}{A x-coordinate which is known to be
+  located inside the river basin of interest. If
+  \code{NULL}, the center point of the input grid is used.}
+
+  \item{y_inBasin}{A y-coordinate which is known to be
+  located inside the river basin of interest. If
+  \code{NULL}, the center point of the input grid is used.}
+
+  \item{replace}{Is is OK to replace an existing output
+  file? Defaults to \code{FALSE}.}
+}
+\value{
+  ID of the system's outlet, i.e. the most downstream reach
+  (integer).
+}
+\description{
+  See the workhorse functions \code{\link{flowdir}} and
+  \code{\link{concTimeIndex}} for details.
+}
+\author{
+  David Kneis \email{david.kneis@uni-potsdam.de}
+}
+

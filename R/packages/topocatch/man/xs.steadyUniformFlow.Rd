@@ -1,0 +1,94 @@
+\name{xs.steadyUniformFlow}
+\alias{xs.steadyUniformFlow}
+\title{Flow rate for steady uniform conditions}
+\usage{
+  xs.steadyUniformFlow(roughness, american, slope, WSE,
+    fun_L2R, fun_L2A, par_L2R, par_L2A)
+}
+\arguments{
+  \item{roughness}{The 'roughness' value to account for
+  energy losses due to friction and turbulence. Must be a
+  scalar. See \code{american} to possible values.}
+
+  \item{american}{A logical value. If \code{TRUE},
+  \code{roughness} is interpreted as Manning's \emph{n}
+  with typical values being in range 0.01 to 0.2. If
+  \code{FALSE}, the values of \code{roughness} should be in
+  the approximate range 5 to 100 and represent Strickler's
+  \emph{k} (\eqn{k=1/n}).}
+
+  \item{slope}{The slope of the channel's bed as a
+  dimensionless number (e.g. m/m).}
+
+  \item{WSE}{A vector of water surface elevations for which
+  the the flow rates are sought.}
+
+  \item{fun_L2R}{A function to return the cross-secion's
+  hydraulic radius for the values in vector \code{WSE}. The
+  interface should be \code{f(params,wse)}. When the
+  function is called, the value of \code{par_L2R} is passed
+  as the first argument and the vector \code{WSE} is passed
+  as the second one.}
+
+  \item{fun_L2A}{A function to return the cross-section's
+  wer area for the values in vector \code{WSE}. The
+  interface should be \code{f(params,wse)}. When the
+  function is called, the value of \code{par_L2A} is passed
+  as the first argument and the vector \code{WSE} is passed
+  as the second one.}
+
+  \item{par_L2R}{A second \emph{constant} argument (i.e.
+  parameter) to be passed to \code{fun_L2R}. Use a list do
+  pass more complex data items.}
+
+  \item{par_L2A}{A second \emph{constant} argument (i.e.
+  parameter) to be passed to \code{fun_L2A}. Use a list do
+  pass more complex data items.}
+}
+\value{
+  A vector of flow rates of the same length as \code{WSE}
+  if all values are finite and positive. Otherwise, an
+  error is generated and an appropriate message is issued.
+}
+\description{
+  The function computes flow rates corresponding to given
+  water surface elevations (WSE) under steady, uniform
+  conditions. The calculation is based Manning's equation
+  (also known as Gaukler-Manning-Strickler's eqn.).
+}
+\note{
+  Use of the functions \code{fun_L2R} and \code{fun_L2A} to
+  represent the cross-section makes this function more
+  generic. It can be applied to cross-sections where the
+  actual geometry data is available. It can also be
+  applied, however, if the actual geometry is not available
+  but the two characteristic functions are know (typically
+  as power laws).  See the examples for how to apply this
+  function in the case where the actual geometry is known
+  using calls to \code{\link{xs.geoFuncs}}.
+}
+\examples{
+# Generate cross-section data and plot
+geo= data.frame(x= 0:5, z= c(2,1.5,0.5,0.5,1.5,2))
+wsElevs= seq(from=0.5, to=1.75, by=0.25)
+hydrProp= xs.geoFuncs(offsets=geo$x, elevations=geo$z, WSE=wsElevs)
+plot(geo$x, geo$z, type="l", xlab="offset", ylab="elevation", asp=1)
+abline(h=wsElevs, lty=3)
+# Wrapper functions for computing wet area and hydr. radius from data
+L2A= function(geo, w) { return(xs.geoFuncs(geo$x, geo$z, w)$area) }
+L2R= function(geo, w) { return(xs.geoFuncs(geo$x, geo$z, w)$rhyd) }
+# Compute flow rates
+hydrProp$flow= xs.steadyUniformFlow(roughness=0.03, american=TRUE, slope=0.01,
+  WSE=wsElevs, fun_L2R=L2R, fun_L2A=L2A, par_L2R=geo, par_L2A=geo)
+print(as.data.frame(hydrProp))
+# Note: This example may performance sub-optimal for large amounts of
+#       data because xs.geoFuncs is called twice in xs.steadyFlow.
+}
+\author{
+  David Kneis \email{david.kneis@uni-potsdam.de}
+}
+\seealso{
+  \code{\link{xs.steadyUniformWSE}} for the reverse
+  computation
+}
+

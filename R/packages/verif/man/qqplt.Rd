@@ -1,0 +1,63 @@
+\name{qqplt}
+\alias{qqplt}
+\title{QQ plot}
+\usage{
+qqplt(x, colObs = "obs", colsSim = c("sim"), alphas = c(c(0.01, 0.05),
+  seq(0.1, 0.9, 0.1), c(0.95, 0.99)), log = FALSE, log_add = 0.001,
+  xlims = -3:3, ylims = -3:3, xlabel = "Obs.", ylabel = "Sim.",
+  xnumbers = TRUE, ynumbers = TRUE, title = "", title.cex = 1,
+  showLegend = TRUE)
+}
+\arguments{
+  \item{x}{A data frame holding observations and the
+  corresponding predictions.}
+
+  \item{colObs}{Name of the column in \code{x} holding the
+  observations.}
+
+  \item{colsSim}{A vector of names identifying the columns
+  in \code{x} that contain the predictions.}
+
+  \item{alphas}{A vector of values between 0 and 1 defining
+  the quantils to be compared.}
+
+  \item{log}{If \code{TRUE}, the data are log-transformed
+  before being analyzed.}
+
+  \item{log_add}{A small value to be added to the data
+  before the log-transformation is done. This is required
+  of the data contain zero values.  Ignored if
+  \code{log=FALSE}.}
+
+  \item{xlims,ylims}{Limits for the x-axis (observation
+  data) and y-axis (simulated data axis). The default will
+  show data between -3 and 3 standard deviations away from
+  the mean.}
+
+  \item{xlabel,ylabel}{Labels for the x-axis (observation
+  axis) and y-axis (simulated data axis).}
+
+  \item{xnumbers,ynumbers}{Should numerical annotations be
+  printed on the axis? Default is \code{TRUE}.}
+
+  \item{title}{Title to be shown above the chart.}
+
+  \item{title.cex}{Controls font size of title.}
+
+  \item{showLegend}{Should the legend be visible?}
+}
+\value{
+\code{NULL}
+}
+\description{
+The function creates a QQ plot from observed and simulated
+data.
+}
+\examples{
+d= data.frame(obs=runif(1000), sim1=runif(1000), sim2=runif(1000))
+qqplt(x=d, colsSim=c("sim1","sim2"), title="Test data")
+}
+\author{
+David Kneis \email{david.kneis@uni-potsdam.de}
+}
+

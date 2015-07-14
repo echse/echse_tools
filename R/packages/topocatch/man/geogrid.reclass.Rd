@@ -1,0 +1,45 @@
+\name{geogrid.reclass}
+\alias{geogrid.reclass}
+\title{Modify/reclassify values of a geogrid object}
+\usage{
+  geogrid.reclass(grid, lower, upper,
+    new = 0.5 * (lower + upper), includeLower = TRUE,
+    includeUpper = TRUE)
+}
+\arguments{
+  \item{grid}{A geogrid object.}
+
+  \item{lower}{A numeric vector defining the lower limits
+  of the classes in the result grid.}
+
+  \item{upper}{A numeric vector defining the upper limits
+  of the classes in the result grid. Must be of the same
+  length as \code{lower}.}
+
+  \item{new}{A numeric vector holding the values to be
+  assigned to the classes.  Must be of the same length as
+  \code{lower} and \code{upper}.}
+
+  \item{includeLower}{Should values being equal those in
+  \code{lower} become part of the classes? (logical)}
+
+  \item{includeUpper}{Should values being equal those in
+  \code{upper} become part of the classes? (logical)}
+}
+\value{
+  An object of class geogrid.
+}
+\description{
+  This function allows for re-classification of the values
+  in a geogrid's matrix.
+}
+\examples{
+# A sample grid
+g= geogrid(m=matrix(1:9, ncol=3, nrow=3, byrow=TRUE),
+  xllcorner=0, yllcorner=0, cellsize=1, nodata_value=-9999)
+print(geogrid.reclass(g, lower=c(1,5), upper=c(5,9), new=c(0,1)))
+}
+\author{
+  David Kneis \email{david.kneis@uni-potsdam.de}
+}
+

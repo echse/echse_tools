@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# NOTE: This will only run on systems with a bash shell
+
+../bin/meteofill ifile_locations="in/test_locs.txt" ifile_data="in/test_data.txt" chars_colsep="	" chars_comment="#" nodata=-99. idw_power=2 nsectors=4 norigins=3 resid_nmin=3 resid_r2min=0.36 resid_llim=0. resid_ulim=9999. ofile_data="out/out_data.txt" ofile_locations="out/out_locs.txt" ndigits_max=3 logfile="out/log.txt" overwrite=true

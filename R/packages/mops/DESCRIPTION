@@ -1,0 +1,17 @@
+Package: mops
+Type: Package
+Title: Utilities to optimize parameters of dynamic simulation models
+Version: 0.3
+Date: 2014-04-02
+Author: David Kneis <david.kneis@uni-potsdam.de>
+Maintainer: David Kneis <david.kneis@uni-potsdam.de>
+Description: The functions in this package facilitate the calibration of
+    dynamic simulation models which read their input parameters from text
+    files. In particular, the package provides functions which can serve as
+    objective functions in one- and multi-dimensional optimization using R's
+    standard methods like 'optimize' and 'optim'. It also provides support for
+    Monte-Carlo simulation. The package has been developed in the context of
+    hydrological catchment modeling.
+Depends:
+    lhs
+License: GPL-3

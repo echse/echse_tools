@@ -1,0 +1,46 @@
+\name{flowacc}
+\alias{flowacc}
+\title{Flow accumulation based on a grid of flow direction codes}
+\usage{
+  flowacc(grid, silent = TRUE)
+}
+\arguments{
+  \item{grid}{A geogrid object with flow direction codes as
+  output by \code{\link{flowdir}}.}
+
+  \item{silent}{Print status info? (logical)}
+}
+\value{
+  A geogrid of flow accumulation values (as integers). See
+  notes.
+}
+\description{
+  The flow accumulation is computed as the number of
+  upstream cells (integer). To convert this into units of
+  an area, one has to multiply by the cell area.
+}
+\note{
+  If the flow direction codes were derived from a DEM
+  containing sinks, the function issues an error messages
+  and calls \code{stop}.
+}
+\examples{
+# Create a simple DEM
+dem_raw= geogrid(m=matrix(c(
+    5,5,5,5,5,5,5,5,
+    5,4,4,4,4,4,4,5,
+    5,4,3,3,3,3,4,5,
+    5,4,3,2,2,3,4,5,
+    5,4,3,2,2,3,4,5,
+    5,4,3,1,1,3,4,5
+  ), ncol=8, nrow=6, byrow=TRUE),
+  xllcorner=0, yllcorner=0, cellsize=1, nodata_value=-9999)
+dem= sinkfill(grid=dem_raw, ndigits=0, silent=FALSE)
+fdir= flowdir(dem)
+facc= flowacc(fdir)
+geogrid.plot(facc,"# upstr. cells")
+}
+\author{
+  David Kneis \email{david.kneis@uni-potsdam.de}
+}
+

@@ -1,0 +1,17 @@
+Package: meteovars
+Type: Package
+Title: Estimation and conversion of meteorological variables
+Version: 0.1
+Date: 2012-12-20
+Author: David Kneis <david.kneis@uni-potsdam.de>
+Maintainer: David Kneis <david.kneis@uni-potsdam.de>
+Description: The package provides a number of functions for estimating and
+    converting meteorological data which are commonly used in conceptual
+    hydrological catchment modeling.
+License: GPL-3
+Collate:
+    'meteovars.r'
+    'sub_pressure.r'
+    'sub_radiation.r'
+    'sub_precipitation.r'
+    'sub_disaggrPrec.r'

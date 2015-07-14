@@ -1,0 +1,10 @@
+Package: verif
+Type: Package
+Title: Functions for verification of model results
+Version: 0.1
+Date: 2013-02-21
+Author: David Kneis <david.kneis@uni-potsdam.de>
+Maintainer: David Kneis <david.kneis@uni-potsdam.de>
+Description: The functions in this package facilitate the verification of the
+    output of dynamic simulation models.
+License: GPL-3

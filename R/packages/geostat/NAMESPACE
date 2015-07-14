@@ -1,0 +1,8 @@
+export(dist2d)
+export(externalInputLocationsTable)
+export(idweights)
+export(neighbors)
+export(northangle)
+export(residualTimeSeries)
+export(sector)
+useDynLib(geostat)

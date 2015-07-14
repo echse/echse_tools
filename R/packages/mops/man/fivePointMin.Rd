@@ -1,0 +1,70 @@
+\name{fivePointMin}
+\alias{fivePointMin}
+\title{Approximate 1D minimization with limited number of function evaluations}
+\usage{
+fivePointMin(f, base = 1, range1 = c(0.5, 2), range2 = c(0.1, 10), ...)
+}
+\arguments{
+  \item{f}{Objective function to be minimized with
+  interface \code{f(x,...)}.  The 1st argument of this
+  function must be a scalar numeric model parameter.  The
+  function must return a scalar numeric result (RMSE, for
+  example).}
+
+  \item{base}{Base value of the parameter with respect to
+  which the objective function is minimized. It is used as
+  the initial value, thus \code{base} should be chosen
+  close to a suspected minimum of the objective function.}
+
+  \item{range1}{Vector of 2 elements defining the search
+  range for the 1st try.  The minimum of the objective
+  function is searched in range \eqn{range1[1] ...
+  range1[2]}. Must fulfill the condition \eqn{range1[1] <
+  base < range1[2]}. If no minimum is found, the search
+  range is extended (see argument \code{range2}).}
+
+  \item{range2}{Vector of 2 elements defining the search
+  range for the 2nd try.  The minimum of the objective
+  function is searched in range \eqn{range2[1] ...
+  range2[2]} if the 1st try (see argument \code{range1})
+  failed. Must fulfill \eqn{range2[1] < range1[1] < base <
+  range1[2] < range2[2]}.}
+
+  \item{...}{Additional arguments to be passed to the
+  objective function.}
+}
+\value{
+A list with two components.  \item{min.x}{The parameter
+value at the approximate minimum.} \item{min.fx}{The value
+of the function at \code{min.x}.}
+}
+\description{
+This function tries to minimize the value of a
+1-dimensional function using a limited number of function
+evaluations. It is intended for operational parameter
+updating of computationally expensive simulation models.
+}
+\note{
+The algorithm tries to approximate a minimum of \code{f}
+based on a single application of parabolic interpolation.
+If the fitted parabola has no minimum, the parameter
+corresponding to the smallest \emph{tested} value of
+\code{f} is returned.
+}
+\examples{
+fun= function(x, ...) {
+  print(paste("Evaluated at",x,"using additional args:",...))
+  return((x-0.5)^2)
+}
+res= fivePointMin(f=fun, base=0, range1=c(-1,1), range2=c(-2,2), "None")
+print(res)
+}
+\author{
+David Kneis \email{david.kneis@uni-potsdam.de}
+}
+\seealso{
+Use \code{\link{optimize}} or another appropriate method
+for minimization problems that require an accurate
+solution.
+}
+

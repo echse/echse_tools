@@ -1,0 +1,21 @@
+
+2013-06-24
+----------
+Make files adapted.
+
+2012-10-29
+----------
+Make files adapted to new directory structure and environment variables.
+
+2012-07-10
+----------
+The new version is capable of performing residual interpolation. A linear model
+is used. The predictor variable is taken from the "z" field of of locations
+table (typically containing elevation data).
+
+2012-03-27
+----------
+Geostatistical core function (neighbor search, etc.) were moved to the "src"
+directory of the R-package 'geostat'. See folder: "/echse/tools/R/packages/geostat/src".
+The include directives and the make file were adjusted accordingly.
+
