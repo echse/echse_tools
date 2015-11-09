@@ -345,7 +345,7 @@ generate= function(files, outdir, overwrite=FALSE) {
     app(ofile,"    for (unsigned int i=0; i<u.size(); i++) data << u[i] << \" \";")
     app(ofile,paste("    errmsg << \"Calculation of derivatives failed (Time: \"",
       " << t << \" Number\" <<\n      \" of deriv.s: \" << dudt.size() << \"",
-      " Value(s) of state(s): \" << data <<\n      \" Length of time step: \"",
+      " Value(s) of state(s): \" << data.str() <<\n      \" Length of time step: \"",
       " << delta_t << \").\";",sep=""))
     app(ofile,paste("    except e(__PRETTY_FUNCTION__,errmsg,__FILE__,__LINE__);",sep=""))
     app(ofile,"    throw(e);")
