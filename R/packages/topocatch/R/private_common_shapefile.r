@@ -49,6 +49,7 @@
 #' @seealso \code{\link{slot}}, \code{\link{readShapeLines}} from package \code{maptools}
 #'
 #' @export
+#'
 
 lineShapeAsTable = function(file, id_field, attribs=c(), endsOnly=FALSE) {
   # Check input
@@ -84,7 +85,7 @@ lineShapeAsTable = function(file, id_field, attribs=c(), endsOnly=FALSE) {
     if (nSegm > 1)
       stop(paste("Line with ID '",id,"' is a multi-part line with ",nSegm," segments.",sep=""))
     for (j in 1:nSegm) {
-      xy= coordinates(thisLine[[j]])
+      xy= sp::coordinates(thisLine[[j]])
       nCoords= nrow(xy)
       write.table(x= cbind(rep(id,nCoords), xy),
         file=f, sep="\t", row.names=FALSE, col.names=FALSE, quote=FALSE, append=TRUE)

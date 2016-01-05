@@ -10,6 +10,7 @@ Description: The package provides a number of methods to pre-process geo data
 License: GPL-3
 Depends:
     shapefiles,
+    sp,
     maptools,
     foreign
 Collate:

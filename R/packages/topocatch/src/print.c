@@ -11,6 +11,6 @@ void F77_SUB(pdbl)(double *x, int *newline) {
 */
 
 void F77_SUB(printstate)(double *x) {
-  printf("[1] Done: %0.0f%\n",*x);
+  printf("[1] Done: %0.0f%%\n",*x);
 }
 

@@ -8,6 +8,16 @@
 #' @docType package
 {}
 
+
+#' @import shapefiles
+library("shapefiles")
+#' @import foreign
+library("foreign")
+#' @import sp
+library("sp")
+#' @import maptools
+library("maptools")
+
 ################################################################################
 
 #' Filling of sinks in a digital elevation model (DEM)
@@ -435,7 +445,7 @@ hydroModelData= function(
         if (!silent) print("Updating shape file's attribute table...")
         # Read attr. table
         dbfname= paste(substr(fileSHP,1,nchar(fileSHP)-3),"dbf",sep="")
-        attTab= read.dbf(dbfname, header=TRUE)
+        attTab= shapefiles::read.dbf(dbfname, header=TRUE)
         attTab= attTab$dbf
         # Delete fields that will be updated if they already exist (may happen in repeated calls, for example)
         del= which(names(attTab) %in% c(gageLocations$id,colname_affectedGagesCode))
