@@ -67,7 +67,7 @@ mcs_sample= function(
   # Draw LHS sample
 #  if (!library("lhs", character.only=TRUE, quietly=TRUE, logical.return=TRUE))
 #    stop("Required package 'lhs' cannot be loaded.")
-  parameters= improvedLHS(n=n, k=nrow(ranges_table))
+  parameters= lhs::improvedLHS(n=n, k=nrow(ranges_table))
   #.............................................................................
   # Convert to the actual parameters
   for (i in 1:nrow(parameters)) {
