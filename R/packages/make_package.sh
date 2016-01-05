@@ -1,16 +1,10 @@
 #!/bin/bash
 
 # This is a generic script to build, check, and install an R package.
-#
 # It is assumed that the package's documentation is contained in the source code
-# for processing with roxygen.
-
-## BEGIN SETTINGS ##############################################################
-
-# A folder where R is searching for packages --> Adjust name of folder and R version
-installDir=$HOME"/R/i686-pc-linux-gnu-library/3.1"
-
-## END SETTINGS ################################################################
+# for processing with roxygen2.
+#
+# USAGE: ./make_package  pkg-name  version
 
 
 # Get name and version of package to be build
@@ -56,16 +50,20 @@ if [ $? -ne 0 ]; then
   exit 1  
 fi
 
-# Move package to R's install dir
+# Install
 echo "Installing package..."
-if [ -d "$installDir/$package" ]; then
-  rm -r "$installDir/$package"
-fi
-mv $build $installDir
-if [ $? -ne 0 ]; then
-  echo Failed to move the built package to $installDir.
-  exit 1  
-fi
+R CMD INSTALL --html $package"_"$version".tar.gz"
+
+## Move package to R's install dir
+#echo "Installing package..."
+#if [ -d "$installDir/$package" ]; then
+#  rm -r "$installDir/$package"
+#fi
+#mv $build $installDir
+#if [ $? -ne 0 ]; then
+#  echo Failed to move the built package to $installDir.
+#  exit 1  
+#fi
 
 # Normal exit
 exit 0
