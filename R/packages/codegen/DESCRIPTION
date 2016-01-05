@@ -1,8 +1,8 @@
 Package: codegen
 Type: Package
 Title: Code generator for the ECHSE
-Version: 0.1
-Date: 2012-06-07
+Version: 0.1.1
+Date: 2015-11-09
 Author: David Kneis <david.kneis@uni-potsdam.de>
 Maintainer: David Kneis <david.kneis@uni-potsdam.de>
 Description: The package provides a function to generate C++ code from a
