@@ -481,7 +481,7 @@ xs.reachPars= function(
       "#   dist.s :   ",round(sourceXS$dist[1],1)," / ",round(sourceXS$dist[2],1),"\n",
       "#   up. areas: ",sourceXS$upstr_area[1]," / ",sourceXS$upstr_area[2],"\n",
       "# Descr. of columns:","\n",
-      "#   Q:    Stream flow (L/T)","\n",
+      "#   Q:    Stream flow (L^3/T)","\n",
       "#   D:    Normal depth, i.e. max. flow depth (L)","\n",
       "#   A:    Wet x-section area (L^2)","\n",
       "#   V:    Storage volume (L^3)","\n",
